@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mastering_flutter_part_1/constant/colors.dart';
 import 'package:mastering_flutter_part_1/presentation/home_page.dart';
+import 'package:splashify/splashify.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Lagu Daerah',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,10 +32,18 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+        ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: Splashify(
+          imagePath: "assets/icons/indonesia-banner.png",
+          imageSize: MediaQuery.of(context).size.height / 2.5,
+          imageFadeIn: true,
+          slideNavigation: true,
+          navigateDuration: 2,
+          child: HomePage()),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

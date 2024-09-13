@@ -1,9 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:mastering_flutter_part_1/constant/colors.dart';
 import 'package:mastering_flutter_part_1/constant/list_lagu.dart';
+import 'package:mastering_flutter_part_1/data/datasources/lagu_remote_datasource.dart';
+import 'package:mastering_flutter_part_1/data/models/lagu_model.dart';
+import 'package:mastering_flutter_part_1/presentation/add_lagu_page.dart';
+
+import '../constant/variables.dart';
+import '../data/models/pulau_response_model.dart';
+import 'home_page.dart';
+import 'widgets/remove_dialog.dart';
 
 class DetailPage extends StatelessWidget {
-  final ProvinceSong provinceSong;
-  const DetailPage({super.key, required this.provinceSong});
+  final String pulau;
+  final LaguModel provinceSong;
+  const DetailPage({
+    Key? key,
+    required this.pulau,
+    required this.provinceSong,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +27,42 @@ class DetailPage extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: Text(
-          provinceSong.laguDaerah,
+          provinceSong.judul,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
+            color: AppColors.secondary,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.teal.shade100,
+        backgroundColor: AppColors.primary,
+        actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (builder) => AddLaguPage(
+                          isUpdate: true,
+                          lagu: provinceSong,
+                        ));
+              },
+              icon: const Icon(
+                Icons.edit_document,
+                color: AppColors.secondary,
+              )),
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (builder) => RemoveDialog(
+                          laguId: provinceSong.id!,
+                        ));
+              },
+              icon: const Icon(
+                Icons.delete_forever_sharp,
+                color: AppColors.secondary,
+              )),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -30,21 +74,24 @@ class DetailPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Image.network(
-              provinceSong.imageUrl,
+              provinceSong.imageUrl!.contains('http')
+                  ? provinceSong.imageUrl!
+                  : Variables.imageUrl + provinceSong.imageUrl!,
               fit: BoxFit.fill,
             ),
           ),
           const SizedBox(
             height: 20,
           ),
-          _LabelValue(label: "Asal Kota", value: provinceSong.nama),
+          _LabelValue(label: "Pulau", value: pulau),
+          _LabelValue(label: "Provinsi", value: provinceSong.provinsi),
           _LabelValue(label: "Ibu Kota", value: provinceSong.ibukota),
           const SizedBox(
             height: 20,
           ),
           const Center(
               child: Text(
-            "Lirik Lagu",
+            "Lirik Lagu 🎶",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -59,7 +106,9 @@ class DetailPage extends StatelessWidget {
               border: Border.all(width: 1, color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: NetworkImage(provinceSong.imageUrl),
+                image: NetworkImage(provinceSong.imageUrl!.contains('http')
+                    ? provinceSong.imageUrl!
+                    : Variables.imageUrl + provinceSong.imageUrl!),
                 fit: BoxFit.cover,
                 opacity: 0.2,
               ),
@@ -92,35 +141,38 @@ class _LabelValue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Colors.grey,
-            fontSize: 20,
-          ),
-        ),
-        const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // const Spacer(),
-            Text(
-              value ?? "<belum ada data>",
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                // color: AppColors.secondary,
-                decoration: TextDecoration.underline,
-              ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              color: AppColors.black,
+              fontSize: 20,
             ),
-          ],
-        ),
-      ],
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // const Spacer(),
+              Text(
+                value ?? "<belum ada data>",
+                textAlign: TextAlign.right,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: AppColors.primary,
+                  // decoration: TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

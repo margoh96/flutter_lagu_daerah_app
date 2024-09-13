@@ -3,6 +3,7 @@ class ProvinceSong {
   String nama;
   String ibukota;
   String laguDaerah;
+  String pulau;
   String lyrics;
   String imageUrl;
 
@@ -11,6 +12,7 @@ class ProvinceSong {
       required this.nama,
       required this.ibukota,
       required this.laguDaerah,
+      required this.pulau,
       required this.lyrics,
       required this.imageUrl});
 }
@@ -21,6 +23,7 @@ class ProvinceList {
       id: 1,
       nama: "Jawa Timur",
       ibukota: "Surabaya",
+      pulau: "Jawa",
       laguDaerah: "Rek Ayo Rek",
       lyrics: """
 Rek ayo rek
@@ -46,6 +49,7 @@ Rame-rame bebarengan
       nama: "Jawa Barat",
       ibukota: "Bandung",
       laguDaerah: "Manuk Dadali",
+      pulau: "Jawa",
       lyrics: """
 Manuk dadali manuk panggagah
 Pahlawan abdi bangsa
@@ -68,6 +72,7 @@ Kaasa puji
       nama: "Sumatera Utara",
       ibukota: "Medan",
       laguDaerah: "Butet",
+      pulau: "Sumatera",
       lyrics: """
 Anak do hamuna butet
 Sapangoluhon do ito
@@ -86,6 +91,7 @@ Paboa ma tu amanta
       nama: "Bali",
       ibukota: "Denpasar",
       laguDaerah: "Janger",
+      pulau: "Bali",
       lyrics: """
 Janger janger
 Gek gek eong janger
@@ -109,6 +115,7 @@ Janger janger
       nama: "Yogyakarta",
       ibukota: "Yogyakarta",
       laguDaerah: "Suwe Ora Jamu",
+      pulau: "Jawa",
       lyrics: """
 Suwe ora jamu
 Jamu godhong telo
@@ -128,6 +135,7 @@ Ketemu pisan gawe jempur
       nama: "Aceh",
       ibukota: "Banda Aceh",
       laguDaerah: "Bungong Jeumpa",
+      pulau: "Sumatera",
       lyrics: """
 Bungong jeumpa, bungong jeumpa
 Meulu di ateuh, ateuh blang
@@ -148,6 +156,7 @@ Lheuh tuan gata
       nama: "Sumatera Barat",
       ibukota: "Padang",
       laguDaerah: "Kampuang Nan Jauh di Mato",
+      pulau: "Sumatera",
       lyrics: """
 Kampuang nan jauh di mato
 Gunuang sansai bak baju
@@ -167,6 +176,7 @@ Kok takana pai tamu
       nama: "Sulawesi Selatan",
       ibukota: "Makassar",
       laguDaerah: "Anging Mammiri",
+      pulau: "Sulawesi",
       lyrics: """
 Anging mammiri ku pasang
 Tulu' ku ga' ri takana
@@ -191,6 +201,7 @@ Tambusu na ga' daung
       nama: "Maluku",
       ibukota: "Ambon",
       laguDaerah: "Rasa Sayange",
+      pulau: "Nusa Tenggara",
       lyrics: """
 Rasa sayange... rasa sayang sayange...
 Eee lihat dari jauh rasa sayang sayange
@@ -211,6 +222,7 @@ Eee lihat dari jauh rasa sayang sayange
       nama: "Papua",
       ibukota: "Jayapura",
       laguDaerah: "Yamko Rambe Yamko",
+      pulau: "Papua",
       lyrics: """
 Yamko rambe yamko aronawa kombe
 Yamko rambe yamko aronawa kombe
